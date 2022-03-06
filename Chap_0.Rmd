@@ -1,0 +1,42 @@
+---
+title: "Statistical Rethinking笔记"
+#CJKmainfont: Microsoft YaHei
+CJKmainfont: "KaiTi"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+author: "Cheng"
+output:
+  pdf_document:
+    includes:
+      header-includes:
+        - \usepackage{xeCJK}
+    keep_tex: yes
+    latex_engine: xelatex
+---
+# Installing the rethinking R package
+
+Install rethinking and its dependencies:
+
+```
+install.packages(c("coda","mvtnorm","devtools"))
+library(devtools)
+devtools::install_github("rmcelreath/rethinking",ref="Experimental")
+```
+
+**Atttention:**
+
+- From https://www.cnblogs.com/shenchuguimo/p/14366277.html
+  `install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))`
+
+  `check_cmdstan_toolchain()`
+  *Error:Other C++ toolchains installed on your system conflict with RT.Please run check_cmdstan_toolchain(fix = TRUE) to fix the issu.*
+
+  `install_cmdstan(check_toolchain = FALSE)`解决问题
+
+- From https://cran.r-project.org/bin/windows/Rtools/rtools40.html
+  1. Download *rtools40-x86_64.exe*
+  2. Rtools4.0 
+  `write('PATH="${RTOOLS40_HOME}\\usr\\所属用户\\bin;${PATH}"', file = "~/.Renviron", append = TRUE)`
+  在配置pandoc是为*所属用户*安装的, 所以如果没有 `usr\\所属用户` pandoc会报错.
+  - 在安装完rethinking R package后, 为解决报错, 尝试将RTOOLS40卸载, 准备下次需要的时候再次安装.
+  
+  - (重新安装了RTOOLS40),解决问题途中使用了命令`check_cmdstan_toolchain(fix = TRUE)`, pandoc不报错了.
